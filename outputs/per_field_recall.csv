@@ -1,7 +1,7 @@
-Field,Exact Matches,Documents,Recall,Recall (%)
+Field,Exact Matches,Documents,Exact Match Rate,Exact Match Rate (%)
 Agreement Value,4,4,1.0,100.0
-Agreement Start Date,0,4,0.0,0.0
-Agreement End Date,0,4,0.0,0.0
+Agreement Start Date,4,4,1.0,100.0
+Agreement End Date,3,4,0.75,75.0
 Renewal Notice (Days),3,4,0.75,75.0
 Party One,1,4,0.25,25.0
 Party Two,0,4,0.0,0.0

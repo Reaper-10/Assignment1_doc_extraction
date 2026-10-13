@@ -140,6 +140,29 @@ python evaluate.py
 
 The evaluator prints the exact-match recall for each of the six fields and saves the report to `outputs/per_field_recall.csv`. Numeric fields are compared numerically (for example, `6500` and `6500.0` match); dates and party names use exact string comparison after whitespace normalization. The score depends on the generated predictions; run the evaluation to produce current metrics rather than relying on stale output files.
 
+### Latest verified test run
+
+The four-document test split was run on 2026-10-13 with `gemini-3.1-flash-lite` selected through `GEMINI_MODEL`. All four documents completed without API errors. The recorded evaluation is **18/24 exact field matches (75.0%)**:
+
+| Field | Exact matches |
+| --- | ---: |
+| Agreement Value | 4/4 (100%) |
+| Agreement Start Date | 4/4 (100%) |
+| Agreement End Date | 2/4 (50%) |
+| Renewal Notice (Days) | 3/4 (75%) |
+| Party One | 4/4 (100%) |
+| Party Two | 1/4 (25%) |
+
+To use the same model in Windows PowerShell for a run, set the model in the current shell before running the commands:
+
+```powershell
+$env:GEMINI_MODEL = "gemini-3.1-flash-lite"
+python main.py --split test
+python -m src.evaluate --predictions outputs/test_predictions.csv --labels data/test.csv
+```
+
+The score measures agreement with the supplied labels, not guaranteed factual correctness. Review predictions against the source document where labels, date conventions, or party-name formatting are ambiguous. Free-tier quota and model availability vary; `429 RESOURCE_EXHAUSTED` and `503 UNAVAILABLE` errors can still occur. The CLI records failed documents in `outputs/test_run_errors.csv`; do not interpret an incomplete run's evaluation as a completed result.
+
 ## Optional REST API
 
 Start the FastAPI service from the project root:
